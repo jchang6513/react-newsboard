@@ -1,0 +1,21 @@
+#App {
+  display: flex;
+  flex-wrap: wrap;  
+  font-family: sans-serif;
+  justify-content: space-between;
+  padding: 20px 0;
+  text-align: center;
+  .news-grid {    
+    flex: 0 0 250px;
+    margin: 0 10px;
+    max-width: calc(50% - 20px);
+    img {
+      border-radius: 10px;
+      width: 100%;
+    }
+    .news-title {
+      font-size: 12px;
+      text-align: left;
+    }
+  }
+}
