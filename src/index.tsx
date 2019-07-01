@@ -1,10 +1,12 @@
 import * as React from "react";
 import { render } from "react-dom";
-
+import { getNews } from "./actions";
 import "./styles.css";
 
 export default class App extends React.Component {
+  componentDidUpdate() {}
   render(): JSX.Element {
+    getNews(1);
     return (
       <div className="App">
         <h1>Hello CodeSandbox</h1>
