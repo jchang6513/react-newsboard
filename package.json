@@ -16,6 +16,9 @@
   "devDependencies": {
     "@types/react": "16.8.8",
     "@types/react-dom": "16.8.2",
+    "react-redux": "^7.1.0",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
     "typescript": "3.3.3"
   },
   "scripts": {
