@@ -1,76 +1,39 @@
 import { Action } from 'redux';
 import { TopNewsActionTypes } from './TopNewsActionTypes';
+import { TopNewsParams } from 'reducers/TopNewsReducer';
+import { BooleanAction } from 'types/Base.type';
 
-interface CountryAction extends Action {
-  country: string;
+export interface TopNewsParamsAction extends Action {
+  params: TopNewsParams;
 }
-
-interface CategoryAction extends Action {
-  category: string;
-}
-
-interface QAction extends Action {
-  q: string;
-}
-
-interface PageAction extends Action {
-  page: number;
-}
-
-interface PerAction extends Action {
-  per: number;
-}
-
 
 export interface INewsBoardActionos {
-  setCountry: (country: string) => CountryAction;
-  setCategory: (category: string) => CategoryAction;
-  setQ: (q: string) => QAction;
-  setPage: (page: number) => PageAction;
-  setPer: (per8: number) => PerAction;
-  checkScrollBottom: () => Action;
+  setLoading: (value: boolean) => BooleanAction;
+  setError: (value: boolean) => BooleanAction;
+  setParams: (params: TopNewsParams) => TopNewsParamsAction;
   loadTopNews: () => Action;
 };
 
 export default class NewsBoardActionos implements INewsBoardActionos {
-  setCountry = (country: string) => {
+
+  setLoading = (value: boolean) => {
     return ({
-      type: TopNewsActionTypes.SET_COUNTRY,
-      country: country
+      type: TopNewsActionTypes.SET_LOADING,
+      value: value
     })
   }
 
-  setCategory = (category: string) => {
+  setError = (value: boolean) => {
     return ({
-      type: TopNewsActionTypes.SET_CATEGORY,
-      category: category
+      type: TopNewsActionTypes.SET_ERROR,
+      value: value
     })
   }
 
-  setQ = (q: string) => {
+  setParams = (params: TopNewsParams) => {
     return ({
-      type: TopNewsActionTypes.SET_Q,
-      q: q
-    })
-  };
-
-  setPage = (page: number) => {
-    return ({
-      type: TopNewsActionTypes.SET_PAGE,
-      page: page
-    })
-  }
-
-  setPer = (per: number) => {
-    return ({
-      type: TopNewsActionTypes.SET_PER,
-      per: per
-    })
-  }
-
-  checkScrollBottom = () => {
-    return ({
-      type: TopNewsActionTypes.CHECK_SCROLL_BOTTOM,
+      type: TopNewsActionTypes.SET_PARAMS,
+      params: params
     })
   }
 
