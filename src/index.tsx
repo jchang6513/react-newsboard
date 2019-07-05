@@ -53,15 +53,32 @@ export default class App extends React.Component<{}, AppStates> {
   };
   render(): JSX.Element {
     const { newsArr } = this.state;
+    const noWaterFall = 2;
+    const waterFalls = Array(noWaterFall)
+      .fill(0)
+      .map((e, i) => i + 1);
 
     return (
       <div id="App" onScroll={el => console.log("?")}>
-        {newsArr.map(news => (
-          <div className="news-grid" key={news.url}>
-            <img src={news.urlToImage} alt="" />
-            <p className="news-title">{news.title}</p>
-          </div>
-        ))}
+        <div className="header">
+          <p>TOP NEWS</p>
+        </div>
+        <div className="news-grids">
+          {waterFalls.map(waterFall => (
+            <div className="waterfall">
+              {newsArr.map((news, index) => {
+                return index % noWaterFall === waterFall - 1 ? (
+                  <div key={news.url} className="news-grid">
+                    <a href={news.url}>
+                      <img src={news.urlToImage} alt="" />
+                      <p className="news-title">{news.title}</p>
+                    </a>
+                  </div>
+                ) : null;
+              })}
+            </div>
+          ))}
+        </div>
       </div>
     );
   }
