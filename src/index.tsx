@@ -1,16 +1,19 @@
 import React from "react";
 import { render } from "react-dom";
-import { getNews, GetNewsCallbacks } from "./actions";
+import { getNews, GetNewsCallbacks } from "./actions/actions";
 import { NewsType } from "./NewsFactory";
 
 import "./styles.scss";
 
+interface AppProps {
+
+}
 interface AppStates {
   currentPage: number;
   newsArr: NewsType[];
 }
-export default class App extends React.Component<{}, AppStates> {
-  constructor(props) {
+export default class App extends React.Component<AppProps, AppStates> {
+  constructor(props: AppProps) {
     super(props);
     this.state = {
       currentPage: 1,
@@ -33,7 +36,7 @@ export default class App extends React.Component<{}, AppStates> {
   handleScroll = () => {
     const { currentPage } = this.state;
     const isBottom =
-      document.getElementById("App").getBoundingClientRect().bottom <=
+      (document.getElementById("App") as any).getBoundingClientRect().bottom <=
       window.innerHeight;
     if (isBottom) {
       const callbacks: GetNewsCallbacks = {
