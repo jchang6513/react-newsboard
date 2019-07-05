@@ -1,7 +1,7 @@
 import React from "react";
 import { render } from "react-dom";
-import { getNews, GetNewsCallbacks } from "./actions/actions";
-import { NewsType } from "./NewsFactory";
+import { getNews, GetNewsCallbacks } from "./actions/AppActions";
+import { News } from "./data/NewsFactory";
 
 import "./styles.scss";
 
@@ -10,7 +10,7 @@ interface AppProps {
 }
 interface AppStates {
   currentPage: number;
-  newsArr: NewsType[];
+  newsArr: News[];
 }
 export default class App extends React.Component<AppProps, AppStates> {
   constructor(props: AppProps) {
@@ -23,7 +23,7 @@ export default class App extends React.Component<AppProps, AppStates> {
   componentDidMount() {
     const { currentPage } = this.state;
     const callbacks: GetNewsCallbacks = {
-      onSuccess: (newsArr: NewsType[]) => {
+      onSuccess: (newsArr: News[]) => {
         this.setState({ newsArr });
       },
       onError: err => {
@@ -40,7 +40,7 @@ export default class App extends React.Component<AppProps, AppStates> {
       window.innerHeight;
     if (isBottom) {
       const callbacks: GetNewsCallbacks = {
-        onSuccess: (newsArr: NewsType[]) => {
+        onSuccess: (newsArr: News[]) => {
           const { newsArr: prevNews } = this.state;
           this.setState({ newsArr: prevNews.concat(newsArr) });
         },

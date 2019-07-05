@@ -1,6 +1,6 @@
 {
   "include": [
-    "src"
+    "src/"
   ],
   "compilerOptions": {
     "baseUrl": "src",
@@ -22,13 +22,16 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-		"noEmitOnError": true,
-		"noFallthroughCasesInSwitch": true,
-		"noUnusedLocals": true,
-		"pretty": true,
-		"removeComments": true,
-		"sourceMap": true,
-		"downlevelIteration": true,
-		"typeRoots": [ "node_modules/@types", "./typings" ]
+    "noEmitOnError": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "pretty": true,
+    "removeComments": true,
+    "sourceMap": true,
+    "downlevelIteration": true,
+    "typeRoots": [
+      "node_modules/@types",
+      "./typings"
+    ]
   }
 }
