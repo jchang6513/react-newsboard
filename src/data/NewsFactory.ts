@@ -1,6 +1,6 @@
 import moment from "moment";
-import { News } from 'data/News';
-import { NetNews } from 'data/NetNews';
+import { News } from '../data/News';
+import { NetNews } from '../data/NetNews';
 
 export default class NewsFactory {
   static createNewsFromNet(netNews: NetNews): News {

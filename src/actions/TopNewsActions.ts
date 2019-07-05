@@ -1,7 +1,7 @@
 import { Action } from 'redux';
 import { TopNewsActionTypes } from './TopNewsActionTypes';
-import { TopNewsParams } from 'reducers/TopNewsReducer';
-import { BooleanAction } from 'types/Base.type';
+import { TopNewsParams } from '../reducers/TopNewsReducer';
+import { BooleanAction, ErrorAction } from '../types/Base.type';
 
 export interface TopNewsParamsAction extends Action {
   params: TopNewsParams;
@@ -9,7 +9,7 @@ export interface TopNewsParamsAction extends Action {
 
 export interface INewsBoardActionos {
   setLoading: (value: boolean) => BooleanAction;
-  setError: (value: boolean) => BooleanAction;
+  setError: (value: Error) => ErrorAction;
   setParams: (params: TopNewsParams) => TopNewsParamsAction;
   loadTopNews: () => Action;
 };
@@ -23,10 +23,10 @@ export default class NewsBoardActionos implements INewsBoardActionos {
     })
   }
 
-  setError = (value: boolean) => {
+  setError = (err: Error) => {
     return ({
       type: TopNewsActionTypes.SET_ERROR,
-      value: value
+      err: err
     })
   }
 

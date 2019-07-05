@@ -1,10 +1,10 @@
-import { News } from 'data/News';
+import { News } from '../data/News';
 import { Action } from 'redux';
-import { TopNewsActionTypes } from 'actions/TopNewsActionTypes';
-import { BooleanAction, ErrorAction } from 'types/Base.type';
-import { TopNewsParamsAction } from 'actions/TopNewsActions';
-import { FetchActionTypes } from 'actions/FetchActionTypes';
-import { NewsArrAction } from 'actions/FetchActions';
+import { TopNewsActionTypes } from '../actions/TopNewsActionTypes';
+import { BooleanAction, ErrorAction } from '../types/Base.type';
+import { TopNewsParamsAction } from '../actions/TopNewsActions';
+import { FetchActionTypes } from '../actions/FetchActionTypes';
+import { NewsArrAction } from '../actions/FetchActions';
 
 export interface TopNewsParams {
   country: string;
@@ -16,14 +16,14 @@ export interface TopNewsParams {
 
 export interface TopNewsState {
   loading: boolean;
-  error: boolean;
+  error?: Error;
   params: TopNewsParams;
-  newsArr?: News;
+  newsArr?: News[];
 }
 
 const initState: TopNewsState = {
   loading: false,
-  error: false,
+  error: undefined,
   params: {
     country: 'tw',
     category: 'general',
@@ -34,7 +34,7 @@ const initState: TopNewsState = {
   newsArr: undefined,
 }
 
-export const reducer = (state: TopNewsState = initState, action: Action) => {
+const reducer = (state: TopNewsState = initState, action: Action): TopNewsState => {
   switch (action.type) {
     case FetchActionTypes.LOAD_TOP_NEWS_SUCCESS:
       return {
@@ -44,7 +44,7 @@ export const reducer = (state: TopNewsState = initState, action: Action) => {
     case FetchActionTypes.LOAD_TOP_NEWS_FAIL:
       return {
         ...state,
-        err: (action as ErrorAction).err
+        error: (action as ErrorAction).err
       }
     case TopNewsActionTypes.SET_LOADING:
       return {
@@ -54,7 +54,7 @@ export const reducer = (state: TopNewsState = initState, action: Action) => {
     case TopNewsActionTypes.SET_ERROR:
       return {
         ...state,
-        error: (action as BooleanAction).value
+        error: (action as ErrorAction).err
       }
     case TopNewsActionTypes.SET_PARAMS:
       return {
@@ -65,3 +65,5 @@ export const reducer = (state: TopNewsState = initState, action: Action) => {
       return state
   }
 }
+
+export default reducer;

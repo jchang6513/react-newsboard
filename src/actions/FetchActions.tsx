@@ -1,10 +1,10 @@
 import { Action } from 'redux';
 import axios from "axios";
-import { FetchActionTypes } from 'actions/FetchActionTypes';
-import NewsFactory from "data/NewsFactory";
-import { News } from 'data/News';
-import { TopNewsParams } from 'reducers/TopNewsReducer';
-import { ErrorAction } from 'types/Base.type';
+import { FetchActionTypes } from './FetchActionTypes';
+import NewsFactory from "../data/NewsFactory";
+import { News } from '../data/News';
+import { TopNewsParams } from '../reducers/TopNewsReducer';
+import { ErrorAction } from '../types/Base.type';
 
 axios.defaults.headers.common["X-Api-Key"] = process.env.REACT_Fetch_NEWS_KEY;
 
