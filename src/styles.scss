@@ -1,6 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=DM+Serif+Display&display=swap');
 
+$background-color: #f7f7f7;
+
 body {
+  background-color: $background-color;
   margin: 0px;
 }
 
@@ -9,10 +12,9 @@ a {
 }
 
 #App {
-  background-color: #f7f7f7;
-  padding-top: 50px;
+  padding: 45px 0;
   .header {
-    background-color: #f7f7f7;
+    background-color: $background-color;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: flex;
     height: 45px;
@@ -37,7 +39,6 @@ a {
     display: flex;
     flex-wrap: wrap;
     font-family: sans-serif;
-    height: calc(100vh - 45px);
     justify-content: space-evenly;
     text-align: center;
     .waterfall {
@@ -47,7 +48,7 @@ a {
         background-color: #fff;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        margin: 10px 0px;
+        margin: 20px 0px;
         text-decoration: none;
         overflow: hidden;
         width: 100%;
@@ -69,6 +70,44 @@ a {
       &.loading:after {
         content: ' .';
         animation: dots 1s steps(5, end) infinite;
+      }
+    }
+  }
+  .footer {
+    background-color: $background-color;
+    bottom: 0px;
+    display: flex;
+    height: 45px;
+    padding: 5px;
+    position: fixed;
+    width: 100%;
+    .icon {
+      flex: 0 0 20px;
+      margin: 12px 15px;
+      text-align: center;
+      svg {
+        height: 20px;
+      }
+    }
+    .search-bar {
+      flex: 0 0 calc(100% - 130px);
+      padding: 0 10px;
+      position: relative;
+      .search-input {
+        border: none;
+        border-radius: 20px;
+        height: 24px;
+        margin: 10px 0;
+        width: 100%;
+      }
+      .icon {
+        position: absolute;
+        right: 10px;
+        top: 0px;
+        svg {
+          height: 12px;
+          width: 12px;
+        }
       }
     }
   }

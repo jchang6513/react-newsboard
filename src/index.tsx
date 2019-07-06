@@ -6,6 +6,7 @@ import TopNewsContainer from './container/TopNewsContainer';
 
 import "./styles.scss";
 import HeaderContainer from './container/HeaderContainer';
+import Footer from './components/Footer';
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
       <Provider store={store}>
         <HeaderContainer />
         <TopNewsContainer />
+        <Footer />
       </Provider>
     </div>
   );
