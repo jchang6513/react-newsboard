@@ -1,6 +1,7 @@
 import React from "react";
 import { TopNewsProps } from '../container/TopNewsContainer';
 import LoadingDots from './LoadingDots';
+import NewsGrid from './NewsGrid';
 
 export default class TopNews extends React.Component<TopNewsProps, {}> {
   constructor(props: TopNewsProps) {
@@ -31,12 +32,7 @@ export default class TopNews extends React.Component<TopNewsProps, {}> {
           <div key={waterFall} className="waterfall">
             {newsArr && newsArr.map((news, index) => {
               return index % noWaterFall === waterFall - 1 ? (
-                <div key={news.url} className="news-grid">
-                  <a href={news.url}>
-                    <img src={news.urlToImage} alt="" />
-                    <p className="news-title">{news.title}</p>
-                  </a>
-                </div>
+                <NewsGrid key={news.url} news={news} />
               ) : null;
             })}
           </div>
