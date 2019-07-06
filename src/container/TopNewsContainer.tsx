@@ -11,8 +11,11 @@ interface StateProps {
 }
 
 interface DispatchProps {
+  resetNews: () => void;
   loadNews: (params: TopNewsParams) => void;
 }
+
+export type TopNewsProps = StateProps & DispatchProps;
 
 const mapStateToProps = (state: StoreState): StateProps => ({
   params: state.TopNews.params,
@@ -22,6 +25,7 @@ const mapStateToProps = (state: StoreState): StateProps => ({
 const topNewAction = new TopNewsActionos();
 
 const mapDispatchToProps: DispatchProps = {
+  resetNews: () => topNewAction.resetTopNews(),
   loadNews: (params: TopNewsParams) => topNewAction.loadTopNews(params)
 }
 

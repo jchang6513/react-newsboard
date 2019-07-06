@@ -44,12 +44,18 @@ export default class TopNewsActionos implements ITopNewsActionos {
     })
   }
 
+  resetTopNews = (): Action => {
+    return ({
+      type: TopNewsActionTypes.RESET_TOP_NEWS
+    })
+  }
+
   loadTopNews = (params: TopNewsParams): PromiseAction => {
     return async (dispatch: Dispatch): Promise<void> => {
       try {
         await dispatch(this.fetchActions.loadTopNewsArr(params));
       } catch (err) {
-
+        throw(err)
       }
     }
   }

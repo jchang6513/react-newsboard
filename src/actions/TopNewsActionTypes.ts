@@ -2,5 +2,5 @@ export enum TopNewsActionTypes {
   SET_LOADING = 'TopNews#SetLoading',
   SET_ERROR = 'TopNews#SetError',
   SET_PARAMS = 'TopNews#SetParams',
-  LOAD_TOP_NEWS = 'TopNews#LoadNews'
+  RESET_TOP_NEWS = 'TopNews#ResetNews'
 }

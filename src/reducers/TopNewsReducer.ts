@@ -63,6 +63,11 @@ const reducer = (state: TopNewsState = initState, action: Action): TopNewsState 
         ...state,
         params: (action as TopNewsParamsAction).params
       }
+    case TopNewsActionTypes.RESET_TOP_NEWS:
+      return {
+        ...state,
+        newsArr: []
+      }
     default:
       return state
   }

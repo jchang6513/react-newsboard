@@ -1,12 +1,5 @@
 import React from "react";
-import { News } from '../data/News';
-import { TopNewsParams } from '../reducers/TopNewsReducer';
-
-interface TopNewsProps {
-  params: TopNewsParams;
-  newsArr?: News[];
-  loadNews: (params: TopNewsParams) => void;
-}
+import { TopNewsProps } from '../container/TopNewsContainer';
 
 export default class TopNews extends React.Component<TopNewsProps, {}> {
   constructor(props: TopNewsProps) {
