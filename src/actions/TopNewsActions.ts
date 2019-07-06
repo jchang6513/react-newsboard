@@ -5,14 +5,14 @@ import { BooleanAction, ErrorAction } from '../types/base.type';
 import FetchActions, { IFetchActions } from './FetchActions';
 import { Dispatch, PromiseAction } from '../types/redux.type';
 
-export interface TopNewsParamsAction extends Action {
-  params: TopNewsParams;
+export interface PartialTopNewsParamsAction extends Action {
+  params: Partial<TopNewsParams>;
 }
 
 export interface ITopNewsActionos {
   setLoading: (value: boolean) => BooleanAction;
   setError: (value: Error) => ErrorAction;
-  setParams: (params: TopNewsParams) => TopNewsParamsAction;
+  setParams: (params: Partial<TopNewsParams>) => PartialTopNewsParamsAction;
   loadTopNews: (params: TopNewsParams) => PromiseAction;
 };
 
@@ -37,7 +37,7 @@ export default class TopNewsActionos implements ITopNewsActionos {
     })
   }
 
-  setParams = (params: TopNewsParams) => {
+  setParams = (params: Partial<TopNewsParams>) => {
     return ({
       type: TopNewsActionTypes.SET_PARAMS,
       params: params
@@ -53,6 +53,7 @@ export default class TopNewsActionos implements ITopNewsActionos {
   loadTopNews = (params: TopNewsParams): PromiseAction => {
     return async (dispatch: Dispatch): Promise<void> => {
       try {
+        dispatch(this.setParams(params))
         await dispatch(this.fetchActions.loadTopNewsArr(params));
       } catch (err) {
         throw(err)

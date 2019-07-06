@@ -8,21 +8,16 @@ export default class TopNews extends React.Component<TopNewsProps, {}> {
   componentDidMount() {
     const { params, loadNews } = this.props;
     loadNews(params);
-    document.addEventListener("scroll", this.handleScroll);
   }
-  handleScroll = () => {
+  loadMore = () => {
     const { params, loadNews } = this.props;
-    const isBottom =
-      (document.getElementById("App") as any).getBoundingClientRect().bottom <= window.innerHeight;
-
-    if (isBottom) {
-      const newParams = {
-        ...params,
-        page: params.page + 1
-      }
-      loadNews(newParams);
+    const newParams = {
+      ...params,
+      page: params.page + 1
     }
+    loadNews(newParams);
   };
+
   render(): JSX.Element {
     const { newsArr } = this.props;
     const noWaterFall = 2;
@@ -46,6 +41,7 @@ export default class TopNews extends React.Component<TopNewsProps, {}> {
             })}
           </div>
         ))}
+        <h5 onClick={this.loadMore}>Load More</h5>
       </div>
     );
   }

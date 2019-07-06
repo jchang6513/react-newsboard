@@ -2,7 +2,7 @@ import { News } from '../data/News';
 import { Action } from 'redux';
 import { TopNewsActionTypes } from '../actions/TopNewsActionTypes';
 import { BooleanAction, ErrorAction } from '../types/base.type';
-import { TopNewsParamsAction } from '../actions/TopNewsActions';
+import { PartialTopNewsParamsAction } from '../actions/TopNewsActions';
 import { FetchActionTypes } from '../actions/FetchActionTypes';
 import { NewsArrAction } from '../actions/FetchActions';
 
@@ -61,7 +61,10 @@ const reducer = (state: TopNewsState = initState, action: Action): TopNewsState 
     case TopNewsActionTypes.SET_PARAMS:
       return {
         ...state,
-        params: (action as TopNewsParamsAction).params
+        params: {
+          ...state.params,
+          ...(action as PartialTopNewsParamsAction).params
+        }
       }
     case TopNewsActionTypes.RESET_TOP_NEWS:
       return {
