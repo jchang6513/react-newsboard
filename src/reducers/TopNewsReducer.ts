@@ -39,13 +39,14 @@ const initState: TopNewsState = {
 const reducer = (state: TopNewsState = initState, action: Action): TopNewsState => {
   switch (action.type) {
     case FetchActionTypes.LOAD_TOP_NEWS_SUCCESS:
+      const { params } = state;
       const { newsArr } = (action as NewsArrAction);
       return {
         ...state,
         newsArr: state.newsArr
           ? state.newsArr.concat(newsArr)
           : newsArr,
-        endOfNews: newsArr.length <= 0
+        endOfNews: newsArr.length < params.pageSize
       }
     case FetchActionTypes.LOAD_TOP_NEWS_FAIL:
       return {
