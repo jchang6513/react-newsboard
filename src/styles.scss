@@ -98,7 +98,11 @@ a {
         border-radius: 20px;
         height: 24px;
         margin: 10px 0;
-        width: 100%;
+        padding: 0 35px 0 15px;
+        width: calc(100% - 50px);
+        &:focus {
+          outline: none;
+        }
       }
       .icon {
         position: absolute;
