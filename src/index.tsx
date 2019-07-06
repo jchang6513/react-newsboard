@@ -1,14 +1,13 @@
 import React from "react";
 import { render } from "react-dom";
 import { Provider } from 'react-redux';
-import store from './store';
-// import TopNewsContainer from './container/TopNewsContainer';
+import store from './reducers/store';
+import TopNewsContainer from './container/TopNewsContainer';
 
 const App = () => {
-  console.log(store.getState().TopNews)
   return (
     <Provider store={store}>
-      {/* <TopNewsContainer/> */}
+      <TopNewsContainer/>
     </Provider>
   );
 };

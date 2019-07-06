@@ -1,7 +1,7 @@
 import { News } from '../data/News';
 import { Action } from 'redux';
 import { TopNewsActionTypes } from '../actions/TopNewsActionTypes';
-import { BooleanAction, ErrorAction } from '../types/Base.type';
+import { BooleanAction, ErrorAction } from '../types/base.type';
 import { TopNewsParamsAction } from '../actions/TopNewsActions';
 import { FetchActionTypes } from '../actions/FetchActionTypes';
 import { NewsArrAction } from '../actions/FetchActions';
@@ -11,7 +11,7 @@ export interface TopNewsParams {
   category: string;
   q: string;
   page: number;
-  per: number;
+  pageSize: number;
 }
 
 export interface TopNewsState {
@@ -29,7 +29,7 @@ const initState: TopNewsState = {
     category: 'general',
     q: '',
     page: 1,
-    per: 10,
+    pageSize: 10,
   },
   newsArr: undefined,
 }
@@ -39,7 +39,9 @@ const reducer = (state: TopNewsState = initState, action: Action): TopNewsState 
     case FetchActionTypes.LOAD_TOP_NEWS_SUCCESS:
       return {
         ...state,
-        newsArr: (action as NewsArrAction).newsArr
+        newsArr: state.newsArr
+          ? state.newsArr.concat((action as NewsArrAction).newsArr)
+          : (action as NewsArrAction).newsArr
       }
     case FetchActionTypes.LOAD_TOP_NEWS_FAIL:
       return {
