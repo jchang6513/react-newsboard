@@ -9,6 +9,7 @@ interface StateProps {
   loading: boolean;
   params: TopNewsParams;
   newsArr?: News[];
+  endOfNews: boolean;
 }
 
 interface DispatchProps {
@@ -21,11 +22,11 @@ export type TopNewsProps = StateProps & DispatchProps;
 const mapStateToProps = (state: StoreState): StateProps => ({
   loading: state.TopNews.loading,
   params: state.TopNews.params,
-  newsArr: state.TopNews.newsArr
+  newsArr: state.TopNews.newsArr,
+  endOfNews: state.TopNews.endOfNews
 })
 
 const topNewAction = new TopNewsActionos();
-
 const mapDispatchToProps: DispatchProps = {
   resetNews: () => topNewAction.resetTopNews(),
   loadNews: (params: TopNewsParams) => topNewAction.loadTopNews(params)

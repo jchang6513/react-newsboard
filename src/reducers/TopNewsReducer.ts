@@ -19,6 +19,7 @@ export interface TopNewsState {
   error?: Error;
   params: TopNewsParams;
   newsArr?: News[];
+  endOfNews: boolean;
 }
 
 const initState: TopNewsState = {
@@ -32,16 +33,19 @@ const initState: TopNewsState = {
     pageSize: 10,
   },
   newsArr: undefined,
+  endOfNews: false,
 }
 
 const reducer = (state: TopNewsState = initState, action: Action): TopNewsState => {
   switch (action.type) {
     case FetchActionTypes.LOAD_TOP_NEWS_SUCCESS:
+      const { newsArr } = (action as NewsArrAction);
       return {
         ...state,
         newsArr: state.newsArr
-          ? state.newsArr.concat((action as NewsArrAction).newsArr)
-          : (action as NewsArrAction).newsArr
+          ? state.newsArr.concat(newsArr)
+          : newsArr,
+        endOfNews: newsArr.length <= 0
       }
     case FetchActionTypes.LOAD_TOP_NEWS_FAIL:
       return {
@@ -69,7 +73,7 @@ const reducer = (state: TopNewsState = initState, action: Action): TopNewsState 
     case TopNewsActionTypes.RESET_TOP_NEWS:
       return {
         ...state,
-        newsArr: []
+        newsArr: initState.newsArr
       }
     default:
       return state

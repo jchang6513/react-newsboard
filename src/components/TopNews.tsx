@@ -20,12 +20,11 @@ export default class TopNews extends React.Component<TopNewsProps, {}> {
   };
 
   render(): JSX.Element {
-    const { loading, newsArr } = this.props;
+    const { loading, newsArr, endOfNews } = this.props;
     const noWaterFall = 2;
     const waterFalls = Array(noWaterFall)
       .fill(0)
       .map((e, i) => i + 1);
-    console.log(loading)
     return (
       <div className="news-grids">
         {waterFalls.map(waterFall => (
@@ -42,10 +41,12 @@ export default class TopNews extends React.Component<TopNewsProps, {}> {
             })}
           </div>
         ))}
-        {
-          loading
-            ? <LoadingDots/>
-            : <span className="news-status" onClick={this.loadMore}>Load More</span>
+        { !endOfNews &&
+          (
+            loading
+              ? <LoadingDots/>
+              : <span className="news-status" onClick={this.loadMore}>Load More</span>
+          )
         }
       </div>
     );
