@@ -11,7 +11,8 @@ const Header = (props: HeaderProps) => {
   const { category, country } = props;
   return (
     <div className="header">
-      <h3>{`${category} in ${country}`}</h3>
+      <img src="https://newsapi.org/favicon-32x32.png"></img>
+      <h3>{`${category.toUpperCase()} IN ${country}`}</h3>
     </div>
   );
 }

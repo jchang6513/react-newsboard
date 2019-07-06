@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=DM+Serif+Display&display=swap');
+
 body {
   margin: 0px;
 }
@@ -10,19 +12,27 @@ a {
   background-color: #f7f7f7;
   .header {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 20px 0;
+    display: flex;
+    height: 45px;
+    justify-content: space-between;
+    padding: 0 15px;
     text-align: center;
-    width: 100%;
+    width: calc(100% - 30px);
+    img {
+      height: 20px;
+      margin: 12px 0;
+    }
     h3 {
+      font-family: 'DM Serif Display', serif;
       color: #3d3d3d;
-      margin: 0px;
+      margin: 10px 0;
     }
   }
   .news-grids {
     display: flex;
     flex-wrap: wrap;
     font-family: sans-serif;
-    height: calc(100vh - 60px);
+    height: calc(100vh - 45px);
     justify-content: space-evenly;
     overflow: scroll;
     text-align: center;
