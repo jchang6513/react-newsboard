@@ -5,12 +5,16 @@ import store from './reducers/store';
 import TopNewsContainer from './container/TopNewsContainer';
 
 import "./styles.scss";
+import HeaderContainer from './container/HeaderContainer';
 
 const App = () => {
   return (
-    <Provider store={store}>
-      <TopNewsContainer/>
-    </Provider>
+    <div id="App">
+      <Provider store={store}>
+        <HeaderContainer />
+        <TopNewsContainer />
+      </Provider>
+    </div>
   );
 };
 

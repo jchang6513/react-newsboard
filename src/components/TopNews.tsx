@@ -38,26 +38,21 @@ export default class TopNews extends React.Component<TopNewsProps, {}> {
       .map((e, i) => i + 1);
 
     return (
-      <div id="App" onScroll={el => console.log("?")}>
-        <div className="header">
-          <h3>TOP NEWS</h3>
-        </div>
-        <div className="news-grids">
-          {waterFalls.map(waterFall => (
-            <div className="waterfall">
-              {newsArr && newsArr.map((news, index) => {
-                return index % noWaterFall === waterFall - 1 ? (
-                  <div key={news.url} className="news-grid">
-                    <a href={news.url}>
-                      <img src={news.urlToImage} alt="" />
-                      <p className="news-title">{news.title}</p>
-                    </a>
-                  </div>
-                ) : null;
-              })}
-            </div>
-          ))}
-        </div>
+      <div className="news-grids">
+        {waterFalls.map(waterFall => (
+          <div key={waterFall} className="waterfall">
+            {newsArr && newsArr.map((news, index) => {
+              return index % noWaterFall === waterFall - 1 ? (
+                <div key={news.url} className="news-grid">
+                  <a href={news.url}>
+                    <img src={news.urlToImage} alt="" />
+                    <p className="news-title">{news.title}</p>
+                  </a>
+                </div>
+              ) : null;
+            })}
+          </div>
+        ))}
       </div>
     );
   }
