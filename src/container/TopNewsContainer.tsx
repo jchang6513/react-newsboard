@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import TopNews from '../components/TopNews';
 
 interface StateProps {
+  loading: boolean;
   params: TopNewsParams;
   newsArr?: News[];
 }
@@ -18,6 +19,7 @@ interface DispatchProps {
 export type TopNewsProps = StateProps & DispatchProps;
 
 const mapStateToProps = (state: StoreState): StateProps => ({
+  loading: state.TopNews.loading,
   params: state.TopNews.params,
   newsArr: state.TopNews.newsArr
 })

@@ -1,5 +1,6 @@
 import React from "react";
 import { TopNewsProps } from '../container/TopNewsContainer';
+import LoadingDots from './LoadingDots';
 
 export default class TopNews extends React.Component<TopNewsProps, {}> {
   constructor(props: TopNewsProps) {
@@ -19,12 +20,12 @@ export default class TopNews extends React.Component<TopNewsProps, {}> {
   };
 
   render(): JSX.Element {
-    const { newsArr } = this.props;
+    const { loading, newsArr } = this.props;
     const noWaterFall = 2;
     const waterFalls = Array(noWaterFall)
       .fill(0)
       .map((e, i) => i + 1);
-
+    console.log(loading)
     return (
       <div className="news-grids">
         {waterFalls.map(waterFall => (
@@ -41,7 +42,11 @@ export default class TopNews extends React.Component<TopNewsProps, {}> {
             })}
           </div>
         ))}
-        <span className="news-status" onClick={this.loadMore}>Load More</span>
+        {
+          loading
+            ? <LoadingDots/>
+            : <span className="news-status" onClick={this.loadMore}>Load More</span>
+        }
       </div>
     );
   }

@@ -52,10 +52,13 @@ export default class TopNewsActionos implements ITopNewsActionos {
 
   loadTopNews = (params: TopNewsParams): PromiseAction => {
     return async (dispatch: Dispatch): Promise<void> => {
+      dispatch(this.setLoading(true))
       try {
         dispatch(this.setParams(params))
         await dispatch(this.fetchActions.loadTopNewsArr(params));
+        dispatch(this.setLoading(false))
       } catch (err) {
+        dispatch(this.setLoading(false))
         throw(err)
       }
     }
