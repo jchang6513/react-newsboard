@@ -41,7 +41,7 @@ export default class TopNews extends React.Component<TopNewsProps, {}> {
             })}
           </div>
         ))}
-        <h5 onClick={this.loadMore}>Load More</h5>
+        <span className="news-status" onClick={this.loadMore}>Load More</span>
       </div>
     );
   }
