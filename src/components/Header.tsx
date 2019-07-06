@@ -8,11 +8,11 @@ export interface StateProps {
 type HeaderProps = StateProps;
 
 const Header = (props: HeaderProps) => {
-  const { country } = props;
+  const { category, country } = props;
   return (
     <div className="header">
       <img src="https://newsapi.org/favicon-32x32.png"></img>
-      <h3>{`${country} TIMES`}</h3>
+      <h3>{`${category.toUpperCase()} IN ${country}`}</h3>
     </div>
   );
 }
