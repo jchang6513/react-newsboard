@@ -1,5 +1,5 @@
 import React from 'react';
-import { HK, JP, TW, UK, US, } from './CountryFlag';
+import { CN, HK, JP, TW, UK, US, } from './CountryFlag';
 
 interface Country {
   svg: JSX.Element;
@@ -8,6 +8,11 @@ interface Country {
 }
 
 const countries: Country[] = [
+  {
+    svg: CN,
+    title: 'China',
+    value: 'cn',
+  },
   {
     svg: HK,
     title: 'Hong Kong',
@@ -20,7 +25,7 @@ const countries: Country[] = [
   },
   {
     svg: TW,
-    title: 'TAIWAN',
+    title: 'Taiwan',
     value: 'tw'
   },
   { svg: UK,
@@ -36,14 +41,16 @@ const countries: Country[] = [
 const CountryList = () => {
   return (
     <div className="list country-list">
-      {
-        countries.map(({svg, value, title}) => (
-          <div key={value} className="list-item country">
-            {svg}
-            <span>{title}</span>
-          </div>
-        ))
-      }
+      <div className="list-block">
+        {
+          countries.map(({svg, value, title}) => (
+            <div key={value} className="list-item country">
+              {svg}
+              <span>{title}</span>
+            </div>
+          ))
+        }
+      </div>
     </div>
   )
 }

@@ -132,12 +132,20 @@ a {
   border-radius: 20px 20px 0 0;
   bottom: 0px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  height: 40vh;
+  height: 50vh;
   left: 0px;
-  padding: 20px 20px 30px;
   position: fixed;
-  width: calc(100% - 40px);
+  width: 100%;
   z-index: 100;
+  .list-block {
+    height: calc(100% - 40px);
+    margin: 25px 20px;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
   .list-item {
     display: flex;
     padding: 15px 0;
@@ -164,7 +172,7 @@ a {
 .list-enter-active {
   opacity: 1;
   .list {
-    max-height: 40vh;
+    max-height: 50vh;
     transition: all .3s;
   }
   transition: all .3s;
@@ -173,7 +181,7 @@ a {
 .list-exit {
   opacity: 1;
   .list {
-    max-height: 40vh;
+    max-height: 50vh;
     transition: all .3s;
   }
 }
