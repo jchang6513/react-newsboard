@@ -11,10 +11,10 @@ const NewsGrid = (props: NewsGridProps) => {
   const dayDiff = moment().diff((news.publishedAt as Moment), "day");
   const hourDiff = moment().diff((news.publishedAt as Moment), "hour");
   const timeDiff = dayDiff > 0
-    ? `${dayDiff} 天前`
+    ? `${dayDiff} Days Ago`
     : hourDiff > 0
-      ? `${hourDiff} 小時前`
-      : `即時`
+      ? `${hourDiff} Hours Ago`
+      : `Now`
   return (
     <a href={news.url}>
       <div className="news-grid">

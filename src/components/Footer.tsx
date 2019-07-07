@@ -5,7 +5,7 @@ import CountryList from './CountryList';
 import { FooterProps } from '../container/FooterContainer';
 
 const Footer = (props: FooterProps) => {
-  const { params, loadNewCountry } = props;
+  const { country, loadNewCountry } = props;
 
   const [showCouontryList, setShowCouontryList] = useState(false);
 
@@ -27,7 +27,7 @@ const Footer = (props: FooterProps) => {
         { showCouontryList &&
           <CSSTransition classNames="list" timeout={300}>
             <div className="back-drop" onClick={() => setShowCouontryList(false)}>
-              <CountryList params={params} onClick={loadNewCountry}/>
+              <CountryList country={country} onClick={loadNewCountry}/>
             </div>
           </CSSTransition>
         }

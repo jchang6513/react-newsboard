@@ -4,17 +4,13 @@ import { BooleanAction, ErrorAction } from '../types/redux.type';
 import FetchActions, { IFetchActions } from './FetchActions';
 import { Dispatch, PromiseAction } from '../types/redux.type';
 import { changeParamsPage, changeParamsCountry } from './ParamsActions';
-import { ParamsState } from '../reducers/ParamsReducer';
 
-export interface PartialTopNewsParamsAction extends Action {
-  params: Partial<ParamsState>;
-}
 
 export interface INewsActions {
   setLoading: (value: boolean) => BooleanAction;
   setError: (err: Error) => ErrorAction;
-  loadMoreNews: (params: ParamsState) => PromiseAction;
-  loadNewCountry: (params: ParamsState) => PromiseAction;
+  loadMoreNews: (page: number) => PromiseAction;
+  loadNewCountry: (country: string) => PromiseAction;
 };
 
 export default class NewsActionos implements INewsActions {
@@ -45,9 +41,12 @@ export default class NewsActionos implements INewsActions {
     })
   }
 
-  loadMoreNews = (params: ParamsState): PromiseAction => {
-    const { page } = params;
-    return async (dispatch: Dispatch): Promise<void> => {
+  loadMoreNews = (page: number): PromiseAction => {
+    return async (dispatch: Dispatch, getState): Promise<void> => {
+      const params = {
+        ...getState().Params,
+        page
+      }
       dispatch(this.setLoading(true))
       try {
         await dispatch(this.fetchActions.loadTopNewsArr(params));
@@ -60,14 +59,19 @@ export default class NewsActionos implements INewsActions {
     }
   }
 
-  loadNewCountry = (params: ParamsState): PromiseAction => {
-    const { country } = params;
-    return async (dispatch: Dispatch): Promise<void> => {
-      dispatch(this.setLoading(true));
+  loadNewCountry = (country: string): PromiseAction => {
+    return async (dispatch: Dispatch, getState): Promise<void> => {
+      const params = {
+        ...getState().Params,
+        page: 1,
+        country
+      }
       dispatch(this.resetNews());
+      dispatch(this.setLoading(true));
       try {
         await dispatch(this.fetchActions.loadTopNewsArr(params));
         dispatch(changeParamsCountry(country))
+        dispatch(changeParamsPage(1))
         dispatch(this.setLoading(false))
       } catch (err) {
         dispatch(this.setLoading(false))

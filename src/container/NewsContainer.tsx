@@ -3,25 +3,24 @@ import NewsActionos from '../actions/NewsActions';
 import { News } from '../data/News';
 import { connect } from 'react-redux';
 import NewsComponent from '../components/News';
-import { ParamsState } from '../reducers/ParamsReducer';
 
 interface StateProps {
   loading: boolean;
-  params: ParamsState;
+  page: number
   newsArr?: News[];
   endOfNews: boolean;
 }
 
 interface DispatchProps {
   resetNews: () => void;
-  loadMoreNews: (params: ParamsState) => void;
+  loadMoreNews: (page: number) => void;
 }
 
 export type TopNewsProps = StateProps & DispatchProps;
 
 const mapStateToProps = (state: StoreState): StateProps => ({
   loading: state.News.loading,
-  params: state.Params,
+  page: state.Params.page,
   newsArr: state.News.newsArr,
   endOfNews: state.News.endOfNews
 })
@@ -29,7 +28,7 @@ const mapStateToProps = (state: StoreState): StateProps => ({
 const topNewAction = new NewsActionos();
 const mapDispatchToProps: DispatchProps = {
   resetNews: () => topNewAction.resetNews(),
-  loadMoreNews: (params: ParamsState) => topNewAction.loadMoreNews(params)
+  loadMoreNews: (page: number) => topNewAction.loadMoreNews(page)
 }
 
 export default connect<StateProps, DispatchProps, {}, StoreState>(

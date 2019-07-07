@@ -1,6 +1,5 @@
 import React from 'react';
 import { CN, HK, JP, TW, UK, US, } from './CountryFlag';
-import { ParamsState } from '../reducers/ParamsReducer';
 
 interface Country {
   svg: JSX.Element;
@@ -41,12 +40,12 @@ const countries: Country[] = [
 ]
 
 interface CountryListProps {
-  params: ParamsState
-  onClick: (params: ParamsState) => void;
+  country: string
+  onClick: (country: string) => void;
 }
 
 const CountryList = (props: CountryListProps) => {
-  const { params, onClick } = props;
+  const { country, onClick } = props;
   return (
     <div className="list country-list">
       <div className="list-block">
@@ -55,13 +54,10 @@ const CountryList = (props: CountryListProps) => {
             <div
               key={value}
               className="list-item country"
-              onClick={() => onClick({
-                ...params,
-                country: value
-              })}
+              onClick={() => onClick(value)}
             >
               {svg}
-              <span className={params.country == value ? 'selected' : '' }>{title}</span>
+              <span className={country == value ? 'selected' : '' }>{title}</span>
             </div>
           ))
         }
