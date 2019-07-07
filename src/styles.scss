@@ -163,6 +163,9 @@ a {
     padding: 15px 0;
     span {
       font-size: 18px;
+      &.selected {
+        font-weight: bold;
+      }
     }
     svg {
       height: 25px;

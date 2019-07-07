@@ -3,10 +3,10 @@ import { render } from "react-dom";
 import { Provider } from 'react-redux';
 import store from './reducers/store';
 import TopNewsContainer from './container/NewsContainer';
+import HeaderContainer from './container/HeaderContainer';
+import FooterContainer from './container/FooterContainer';
 
 import "./styles.scss";
-import HeaderContainer from './container/HeaderContainer';
-import Footer from './components/Footer';
 
 const App = () => {
   return (
@@ -14,7 +14,7 @@ const App = () => {
       <Provider store={store}>
         <HeaderContainer />
         <TopNewsContainer />
-        <Footer />
+        <FooterContainer />
       </Provider>
     </div>
   );

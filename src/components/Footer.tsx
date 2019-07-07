@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 import CountryList from './CountryList';
+import { FooterProps } from '../container/FooterContainer';
 
-const Footer = () => {
+const Footer = (props: FooterProps) => {
+  const { params, loadNewCountry } = props;
+
   const [showCouontryList, setShowCouontryList] = useState(false);
 
   useEffect(() => {
@@ -24,7 +27,7 @@ const Footer = () => {
         { showCouontryList &&
           <CSSTransition classNames="list" timeout={300}>
             <div className="back-drop" onClick={() => setShowCouontryList(false)}>
-              <CountryList />
+              <CountryList params={params} onClick={loadNewCountry}/>
             </div>
           </CSSTransition>
         }

@@ -3,7 +3,12 @@ import { StoreState } from '../reducers/store';
 import { connect } from 'react-redux';
 
 const countryName:{[key in string]: string} = {
-  tw: 'TAIWAN'
+  cn: 'CHINA',
+  hk: 'HONGKONG',
+  jp: 'JAPAN',
+  tw: 'TAIWAN',
+  uk: 'BRITISH',
+  us: 'AMERICA'
 }
 
 const mapStateToProps = (state: StoreState): StateProps => ({
