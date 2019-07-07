@@ -1,7 +1,7 @@
 import { Action } from 'redux';
 import { NewsActionTypes } from './NewsActionTypes';
 import { NewsParams } from '../reducers/NewsReducer';
-import { BooleanAction, ErrorAction } from '../types/base.type';
+import { BooleanAction, ErrorAction } from '../types/redux.type';
 import FetchActions, { IFetchActions } from './FetchActions';
 import { Dispatch, PromiseAction } from '../types/redux.type';
 
@@ -9,20 +9,21 @@ export interface PartialTopNewsParamsAction extends Action {
   params: Partial<NewsParams>;
 }
 
-export interface INewsActionos {
+export interface INewsActions {
   setLoading: (value: boolean) => BooleanAction;
-  setError: (value: Error) => ErrorAction;
+  setError: (err: Error) => ErrorAction;
   setParams: (params: Partial<NewsParams>) => PartialTopNewsParamsAction;
   loadNews: (params: NewsParams) => PromiseAction;
 };
 
-export default class NewsActionos implements INewsActionos {
+export default class NewsActionos implements INewsActions {
 
   private fetchActions: IFetchActions;
 
   constructor() {
     this.fetchActions = new FetchActions();
   }
+
   setLoading = (value: boolean) => {
     return ({
       type: NewsActionTypes.SET_LOADING,

@@ -4,7 +4,7 @@ import { FetchActionTypes } from './FetchActionTypes';
 import NewsFactory from "../data/NewsFactory";
 import { News } from '../data/News';
 import { NewsParams } from '../reducers/NewsReducer';
-import { ErrorAction } from '../types/base.type';
+import { ErrorAction } from '../types/redux.type';
 import { Dispatch, PromiseAction } from '../types/redux.type';
 
 

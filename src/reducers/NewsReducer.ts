@@ -1,7 +1,7 @@
 import { News } from '../data/News';
 import { Action } from 'redux';
 import { NewsActionTypes } from '../actions/NewsActionTypes';
-import { BooleanAction, ErrorAction } from '../types/base.type';
+import { BooleanAction, ErrorAction } from '../types/redux.type';
 import { PartialTopNewsParamsAction } from '../actions/NewsActions';
 import { FetchActionTypes } from '../actions/FetchActionTypes';
 import { NewsArrAction } from '../actions/FetchActions';

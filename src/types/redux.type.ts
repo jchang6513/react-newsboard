@@ -10,5 +10,17 @@ export type ThunkAction<T = any> = (dispatch: Dispatch, getState: GetState) => T
 export type PromiseAction<T = any> = ThunkAction<Promise<T>>;
 
 export interface ErrorAction extends Action {
-  error: Error;
+  err: Error;
+}
+
+export interface StringAction extends Action {
+  value: String
+}
+
+export interface NumberAction extends Action {
+  value: number
+}
+
+export interface BooleanAction extends Action {
+  value: boolean;
 }
