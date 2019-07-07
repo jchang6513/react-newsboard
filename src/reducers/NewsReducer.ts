@@ -1,12 +1,12 @@
 import { News } from '../data/News';
 import { Action } from 'redux';
-import { TopNewsActionTypes } from '../actions/TopNewsActionTypes';
+import { NewsActionTypes } from '../actions/NewsActionTypes';
 import { BooleanAction, ErrorAction } from '../types/base.type';
-import { PartialTopNewsParamsAction } from '../actions/TopNewsActions';
+import { PartialTopNewsParamsAction } from '../actions/NewsActions';
 import { FetchActionTypes } from '../actions/FetchActionTypes';
 import { NewsArrAction } from '../actions/FetchActions';
 
-export interface TopNewsParams {
+export interface NewsParams {
   country: string;
   category: string;
   q: string;
@@ -14,15 +14,15 @@ export interface TopNewsParams {
   pageSize: number;
 }
 
-export interface TopNewsState {
+export interface NewsState {
   loading: boolean;
   error?: Error;
-  params: TopNewsParams;
+  params: NewsParams;
   newsArr?: News[];
   endOfNews: boolean;
 }
 
-const initState: TopNewsState = {
+const initState: NewsState = {
   loading: false,
   error: undefined,
   params: {
@@ -36,7 +36,7 @@ const initState: TopNewsState = {
   endOfNews: false,
 }
 
-const reducer = (state: TopNewsState = initState, action: Action): TopNewsState => {
+const reducer = (state: NewsState = initState, action: Action): NewsState => {
   switch (action.type) {
     case FetchActionTypes.LOAD_TOP_NEWS_SUCCESS:
       const { params } = state;
@@ -53,17 +53,17 @@ const reducer = (state: TopNewsState = initState, action: Action): TopNewsState 
         ...state,
         error: (action as ErrorAction).err
       }
-    case TopNewsActionTypes.SET_LOADING:
+    case NewsActionTypes.SET_LOADING:
       return {
         ...state,
         loading: (action as BooleanAction).value
       }
-    case TopNewsActionTypes.SET_ERROR:
+    case NewsActionTypes.SET_ERROR:
       return {
         ...state,
         error: (action as ErrorAction).err
       }
-    case TopNewsActionTypes.SET_PARAMS:
+    case NewsActionTypes.SET_PARAMS:
       return {
         ...state,
         params: {
@@ -71,7 +71,7 @@ const reducer = (state: TopNewsState = initState, action: Action): TopNewsState 
           ...(action as PartialTopNewsParamsAction).params
         }
       }
-    case TopNewsActionTypes.RESET_TOP_NEWS:
+    case NewsActionTypes.RESET_TOP_NEWS:
       return {
         ...state,
         newsArr: initState.newsArr

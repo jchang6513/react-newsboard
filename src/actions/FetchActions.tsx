@@ -3,7 +3,7 @@ import axios from "axios";
 import { FetchActionTypes } from './FetchActionTypes';
 import NewsFactory from "../data/NewsFactory";
 import { News } from '../data/News';
-import { TopNewsParams } from '../reducers/TopNewsReducer';
+import { NewsParams } from '../reducers/NewsReducer';
 import { ErrorAction } from '../types/base.type';
 import { Dispatch, PromiseAction } from '../types/redux.type';
 
@@ -14,7 +14,7 @@ export interface NewsArrAction extends Action {
 }
 
 export interface IFetchActions {
-  loadTopNewsArr(params: TopNewsParams): PromiseAction<any>;
+  loadTopNewsArr(params: NewsParams): PromiseAction<any>;
 }
 
 export default class FetchActions implements IFetchActions {
@@ -31,7 +31,7 @@ export default class FetchActions implements IFetchActions {
     return ({ type: FetchActionTypes.LOAD_TOP_NEWS_FAIL, err: err });
   };
 
-  loadTopNewsArr = (params: TopNewsParams): PromiseAction<any> => {
+  loadTopNewsArr = (params: NewsParams): PromiseAction<any> => {
     return async (dispatch: Dispatch): Promise<any> => {
       dispatch(FetchActions._loadTopNewsArrStart())
       await axios.get("https://newsapi.org/v2/top-headlines", { params: params })

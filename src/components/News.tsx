@@ -1,5 +1,5 @@
 import React from "react";
-import { TopNewsProps } from '../container/TopNewsContainer';
+import { TopNewsProps } from '../container/NewsContainer';
 import LoadingDots from './LoadingDots';
 import NewsGrid from './NewsGrid';
 

@@ -1,14 +1,14 @@
 import { combineReducers, applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk';
-import TopNews, { TopNewsState } from './TopNewsReducer';
+import News, { NewsState } from './NewsReducer';
 
 export interface StoreState {
-  TopNews: TopNewsState;
+  News: NewsState;
 }
 
 const store = createStore(
   combineReducers<StoreState>({
-    TopNews,
+    News
   }),
   applyMiddleware(thunk)
 )

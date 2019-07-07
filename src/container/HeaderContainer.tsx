@@ -7,8 +7,8 @@ const countryName:{[key in string]: string} = {
 }
 
 const mapStateToProps = (state: StoreState): StateProps => ({
-  category: state.TopNews.params.category,
-  country: countryName[state.TopNews.params.country]
+  category: state.News.params.category,
+  country: countryName[state.News.params.country]
 })
 
 export default connect(

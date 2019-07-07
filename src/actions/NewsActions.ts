@@ -1,22 +1,22 @@
 import { Action } from 'redux';
-import { TopNewsActionTypes } from './TopNewsActionTypes';
-import { TopNewsParams } from '../reducers/TopNewsReducer';
+import { NewsActionTypes } from './NewsActionTypes';
+import { NewsParams } from '../reducers/NewsReducer';
 import { BooleanAction, ErrorAction } from '../types/base.type';
 import FetchActions, { IFetchActions } from './FetchActions';
 import { Dispatch, PromiseAction } from '../types/redux.type';
 
 export interface PartialTopNewsParamsAction extends Action {
-  params: Partial<TopNewsParams>;
+  params: Partial<NewsParams>;
 }
 
-export interface ITopNewsActionos {
+export interface INewsActionos {
   setLoading: (value: boolean) => BooleanAction;
   setError: (value: Error) => ErrorAction;
-  setParams: (params: Partial<TopNewsParams>) => PartialTopNewsParamsAction;
-  loadTopNews: (params: TopNewsParams) => PromiseAction;
+  setParams: (params: Partial<NewsParams>) => PartialTopNewsParamsAction;
+  loadNews: (params: NewsParams) => PromiseAction;
 };
 
-export default class TopNewsActionos implements ITopNewsActionos {
+export default class NewsActionos implements INewsActionos {
 
   private fetchActions: IFetchActions;
 
@@ -25,32 +25,32 @@ export default class TopNewsActionos implements ITopNewsActionos {
   }
   setLoading = (value: boolean) => {
     return ({
-      type: TopNewsActionTypes.SET_LOADING,
+      type: NewsActionTypes.SET_LOADING,
       value: value
     })
   }
 
   setError = (err: Error) => {
     return ({
-      type: TopNewsActionTypes.SET_ERROR,
+      type: NewsActionTypes.SET_ERROR,
       err: err
     })
   }
 
-  setParams = (params: Partial<TopNewsParams>) => {
+  setParams = (params: Partial<NewsParams>) => {
     return ({
-      type: TopNewsActionTypes.SET_PARAMS,
+      type: NewsActionTypes.SET_PARAMS,
       params: params
     })
   }
 
   resetTopNews = (): Action => {
     return ({
-      type: TopNewsActionTypes.RESET_TOP_NEWS
+      type: NewsActionTypes.RESET_TOP_NEWS
     })
   }
 
-  loadTopNews = (params: TopNewsParams): PromiseAction => {
+  loadNews = (params: NewsParams): PromiseAction => {
     return async (dispatch: Dispatch): Promise<void> => {
       dispatch(this.setLoading(true))
       try {
