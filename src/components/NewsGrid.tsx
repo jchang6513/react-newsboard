@@ -18,7 +18,7 @@ const NewsGrid = (props: NewsGridProps) => {
   return (
     <a href={news.url}>
       <div className="news-grid">
-        <a style={{backgroundImage: `url(${news.urlToImage})`}} />
+        <div className="news-img" style={{backgroundImage: `url(${news.urlToImage})`}} />
         <div className="news-content">
           <p className="news-title">
             {news.title}
