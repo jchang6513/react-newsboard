@@ -45,7 +45,7 @@ const reducer = (state: NewsState = initState, action: Action): NewsState => {
         ...state,
         error: (action as ErrorAction).err
       }
-    case NewsActionTypes.RESET_TOP_NEWS:
+    case NewsActionTypes.RESET_NEWS:
       return {
         ...state,
         newsArr: initState.newsArr

@@ -28,7 +28,7 @@ const mapStateToProps = (state: StoreState): StateProps => ({
 
 const topNewAction = new NewsActionos();
 const mapDispatchToProps: DispatchProps = {
-  resetNews: () => topNewAction.resetTopNews(),
+  resetNews: () => topNewAction.resetNews(),
   loadMoreNews: (params: ParamsState) => topNewAction.loadMoreNews(params)
 }
 

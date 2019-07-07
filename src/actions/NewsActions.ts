@@ -38,9 +38,9 @@ export default class NewsActionos implements INewsActions {
     })
   }
 
-  resetTopNews = (): Action => {
+  resetNews = (): Action => {
     return ({
-      type: NewsActionTypes.RESET_TOP_NEWS
+      type: NewsActionTypes.RESET_NEWS
     })
   }
 
