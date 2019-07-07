@@ -1,19 +1,19 @@
 import { Action } from 'redux';
 import { NewsActionTypes } from './NewsActionTypes';
-import { NewsParams } from '../reducers/NewsReducer';
 import { BooleanAction, ErrorAction } from '../types/redux.type';
 import FetchActions, { IFetchActions } from './FetchActions';
 import { Dispatch, PromiseAction } from '../types/redux.type';
+import { changeParamsPage } from './ParamsActions';
+import { ParamsState } from '../reducers/ParamsReducer';
 
 export interface PartialTopNewsParamsAction extends Action {
-  params: Partial<NewsParams>;
+  params: Partial<ParamsState>;
 }
 
 export interface INewsActions {
   setLoading: (value: boolean) => BooleanAction;
   setError: (err: Error) => ErrorAction;
-  setParams: (params: Partial<NewsParams>) => PartialTopNewsParamsAction;
-  loadNews: (params: NewsParams) => PromiseAction;
+  loadMoreNews: (params: ParamsState) => PromiseAction;
 };
 
 export default class NewsActionos implements INewsActions {
@@ -38,25 +38,19 @@ export default class NewsActionos implements INewsActions {
     })
   }
 
-  setParams = (params: Partial<NewsParams>) => {
-    return ({
-      type: NewsActionTypes.SET_PARAMS,
-      params: params
-    })
-  }
-
   resetTopNews = (): Action => {
     return ({
       type: NewsActionTypes.RESET_TOP_NEWS
     })
   }
 
-  loadNews = (params: NewsParams): PromiseAction => {
+  loadMoreNews = (params: ParamsState): PromiseAction => {
+    const { page } = params;
     return async (dispatch: Dispatch): Promise<void> => {
       dispatch(this.setLoading(true))
       try {
-        dispatch(this.setParams(params))
         await dispatch(this.fetchActions.loadTopNewsArr(params));
+        dispatch(changeParamsPage(page))
         dispatch(this.setLoading(false))
       } catch (err) {
         dispatch(this.setLoading(false))

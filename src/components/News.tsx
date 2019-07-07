@@ -8,7 +8,7 @@ export default class TopNews extends React.Component<TopNewsProps, {}> {
     super(props);
   }
   componentDidMount() {
-    const { params, loadNews } = this.props;
+    const { params, loadMoreNews: loadNews } = this.props;
     loadNews(params);
     document.addEventListener('scroll', this.trackScrolling);
   }
@@ -30,12 +30,12 @@ export default class TopNews extends React.Component<TopNewsProps, {}> {
   };
 
   loadMore = () => {
-    const { params, loadNews } = this.props;
+    const { params, loadMoreNews } = this.props;
     const newParams = {
       ...params,
       page: params.page + 1
     }
-    loadNews(newParams);
+    loadMoreNews(newParams);
   };
 
   render(): JSX.Element {
