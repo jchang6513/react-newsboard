@@ -14,7 +14,7 @@ export interface ErrorAction extends Action {
 }
 
 export interface StringAction extends Action {
-  value: String
+  value: string
 }
 
 export interface NumberAction extends Action {
