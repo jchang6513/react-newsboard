@@ -22,20 +22,10 @@ export default class TopNews extends React.Component<TopNewsProps, {}> {
 
   render(): JSX.Element {
     const { loading, newsArr, endOfNews } = this.props;
-    const noWaterFall = 2;
-    const waterFalls = Array(noWaterFall)
-      .fill(0)
-      .map((e, i) => i + 1);
     return (
       <div className="news-grids">
-        {waterFalls.map(waterFall => (
-          <div key={waterFall} className="waterfall">
-            {newsArr && newsArr.map((news, index) => {
-              return index % noWaterFall === waterFall - 1 ? (
-                <NewsGrid key={news.url} news={news} />
-              ) : null;
-            })}
-          </div>
+        {newsArr && newsArr.map((news) => (
+          <NewsGrid key={news.url} news={news} />
         ))}
         { !endOfNews &&
           (
