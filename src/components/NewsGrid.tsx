@@ -23,9 +23,10 @@ const NewsGrid = (props: NewsGridProps) => {
           <p className="news-title">
             {news.title}
           </p>
-          <p className="news-caption">
-            {timeDiff}
-          </p>
+          <div className="news-caption">
+            <span>{news.sourceName}</span>
+            <span>{timeDiff}</span>
+          </div>
         </div>
       </div>
     </a>
