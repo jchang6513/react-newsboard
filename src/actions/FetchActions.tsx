@@ -13,6 +13,19 @@ export interface NewsArrAction extends Action {
   newsArr: News[];
 }
 
+const wrapApi = (action: (d: Dispatch, p: ParamsState) => PromiseAction): PromiseAction => {
+  return async (dispatch: Dispatch, getState): Promise<void> => {
+    dispatch(setLoading(true))
+    try {
+      await dispatch(action(dispatch, getState().Params))
+      dispatch(setLoading(false))
+    } catch (err) {
+      dispatch(setLoading(false))
+      throw(err)
+    }
+  }
+}
+
 export const loadTopNewsArr = (params: ParamsState): PromiseAction<any> => {
   return async (dispatch: Dispatch): Promise<any> => {
     dispatch(loadTopNewsArrStart())
@@ -29,41 +42,27 @@ export const loadTopNewsArr = (params: ParamsState): PromiseAction<any> => {
   }
 }
 
-export const loadMoreNews = (page: number): PromiseAction => {
-  return async (dispatch: Dispatch, getState): Promise<void> => {
+export const loadMoreNews = (page: number) => (
+  wrapApi((dispatch: Dispatch, prevParams: ParamsState) => async () => {
     const params = {
-      ...getState().Params,
+      ...prevParams,
       page
     }
-    dispatch(setLoading(true))
-    try {
-      await dispatch(loadTopNewsArr(params));
-      dispatch(changeParamsPage(page))
-      dispatch(setLoading(false))
-    } catch (err) {
-      dispatch(setLoading(false))
-      throw(err)
-    }
-  }
-}
+    await dispatch(loadTopNewsArr(params));
+    dispatch(changeParamsPage(page))
+  })
+)
 
-export const loadNewCountry = (country: string): PromiseAction => {
-  return async (dispatch: Dispatch, getState): Promise<void> => {
+export const loadNewCountry = (country: string) => (
+  wrapApi((dispatch: Dispatch, prevParams: ParamsState) => async () => {
     const params = {
-      ...getState().Params,
+      ...prevParams,
       page: 1,
       country
     }
     dispatch(resetNews());
-    dispatch(setLoading(true));
-    try {
-      await dispatch(loadTopNewsArr(params));
-      dispatch(changeParamsCountry(country))
-      dispatch(changeParamsPage(1))
-      dispatch(setLoading(false))
-    } catch (err) {
-      dispatch(setLoading(false))
-      throw(err)
-    }
-  }
-}
+    await dispatch(loadTopNewsArr(params));
+    dispatch(changeParamsCountry(country))
+    dispatch(changeParamsPage(1))
+  })
+)
