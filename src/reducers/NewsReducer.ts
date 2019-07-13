@@ -2,7 +2,6 @@ import { News } from '../data/News';
 import { Action } from 'redux';
 import { NewsActionTypes } from '../actions/NewsActionTypes';
 import { BooleanAction, ErrorAction } from '../types/redux.type';
-import { FetchActionTypes } from '../actions/FetchActionTypes';
 import { NewsArrAction } from '../actions/FetchActions';
 
 export interface NewsState {
@@ -21,7 +20,7 @@ const initState: NewsState = {
 
 const reducer = (state: NewsState = initState, action: Action): NewsState => {
   switch (action.type) {
-    case FetchActionTypes.LOAD_TOP_NEWS_SUCCESS:
+    case NewsActionTypes.LOAD_TOP_NEWS_SUCCESS:
       const { newsArr } = (action as NewsArrAction);
       return {
         ...state,
@@ -30,7 +29,7 @@ const reducer = (state: NewsState = initState, action: Action): NewsState => {
           : newsArr,
         endOfNews: newsArr.length < 1
       }
-    case FetchActionTypes.LOAD_TOP_NEWS_FAIL:
+    case NewsActionTypes.LOAD_TOP_NEWS_FAIL:
       return {
         ...state,
         error: (action as ErrorAction).err

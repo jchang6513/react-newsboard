@@ -1,8 +1,9 @@
 import { StoreState } from '../reducers/store';
-import { resetNews, loadMoreNews } from '../actions/NewsActions';
+import { resetNews } from '../actions/NewsActions';
 import { News } from '../data/News';
 import { connect } from 'react-redux';
 import NewsComponent from '../components/News';
+import { loadMoreNews } from '../actions/FetchActions';
 
 interface StateProps {
   loading: boolean;
