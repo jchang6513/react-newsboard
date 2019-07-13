@@ -1,5 +1,5 @@
 import { StoreState } from '../reducers/store';
-import NewsActionos from '../actions/NewsActions';
+import { resetNews, loadMoreNews } from '../actions/NewsActions';
 import { News } from '../data/News';
 import { connect } from 'react-redux';
 import NewsComponent from '../components/News';
@@ -25,10 +25,9 @@ const mapStateToProps = (state: StoreState): StateProps => ({
   endOfNews: state.News.endOfNews
 })
 
-const topNewAction = new NewsActionos();
 const mapDispatchToProps: DispatchProps = {
-  resetNews: () => topNewAction.resetNews(),
-  loadMoreNews: (page: number) => topNewAction.loadMoreNews(page)
+  resetNews: () => resetNews(),
+  loadMoreNews: (page: number) => loadMoreNews(page)
 }
 
 export default connect<StateProps, DispatchProps, {}, StoreState>(

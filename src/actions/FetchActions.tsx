@@ -12,38 +12,30 @@ axios.defaults.headers.common["X-Api-Key"] = process.env.REACT_APP_NEWS_KEY;
 export interface NewsArrAction extends Action {
   newsArr: News[];
 }
-
-export interface IFetchActions {
-  loadTopNewsArr(params: ParamsState): PromiseAction<any>;
+const _loadTopNewsArrStart = (): Action => {
+  return ({ type: FetchActionTypes.LOAD_TOP_NEWS_START });
 }
 
-export default class FetchActions implements IFetchActions {
-
-  static _loadTopNewsArrStart = (): Action => {
-    return ({ type: FetchActionTypes.LOAD_TOP_NEWS_START });
-  }
-
-  static _loadTopNewsArrSucces(newsArr: News[]): NewsArrAction {
-    return ({ type: FetchActionTypes.LOAD_TOP_NEWS_SUCCESS, newsArr: newsArr });
-  };
-
-  static _loadTopNewsArrFail(err: Error): ErrorAction {
-    return ({ type: FetchActionTypes.LOAD_TOP_NEWS_FAIL, err: err });
-  };
-
-  loadTopNewsArr = (params: ParamsState): PromiseAction<any> => {
-    return async (dispatch: Dispatch): Promise<any> => {
-      dispatch(FetchActions._loadTopNewsArrStart())
-      await axios.get("https://newsapi.org/v2/top-headlines", { params: params })
-        .then(response => {
-          const newsArr = NewsFactory.createNewsArrayFromNet(response.data.articles);
-          dispatch(FetchActions._loadTopNewsArrSucces(newsArr));
-          return newsArr;
-        })
-        .catch(err => {
-          dispatch(FetchActions._loadTopNewsArrFail(err));
-          throw err
-        });
-    }
-  }
+const _loadTopNewsArrSucces = (newsArr: News[]): NewsArrAction => {
+  return ({ type: FetchActionTypes.LOAD_TOP_NEWS_SUCCESS, newsArr: newsArr });
 };
+
+const _loadTopNewsArrFail = (err: Error): ErrorAction => {
+  return ({ type: FetchActionTypes.LOAD_TOP_NEWS_FAIL, err: err });
+};
+
+export const loadTopNewsArr = (params: ParamsState): PromiseAction<any> => {
+  return async (dispatch: Dispatch): Promise<any> => {
+    dispatch(_loadTopNewsArrStart())
+    await axios.get("https://newsapi.org/v2/top-headlines", { params: params })
+      .then(response => {
+        const newsArr = NewsFactory.createNewsArrayFromNet(response.data.articles);
+        dispatch(_loadTopNewsArrSucces(newsArr));
+        return newsArr;
+      })
+      .catch(err => {
+        dispatch(_loadTopNewsArrFail(err));
+        throw err
+      });
+  }
+}

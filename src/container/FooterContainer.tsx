@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import Footer from '../components/Footer';
 import { StoreState } from '../reducers/store';
-import NewsActionos from '../actions/NewsActions';
+import { loadNewCountry } from '../actions/NewsActions';
 
 interface StateProps {
   country: string
@@ -16,9 +16,8 @@ const mapStateToProps = (state: StoreState): StateProps => ({
   country: state.Params.country
 })
 
-const topNewAction = new NewsActionos();
 const mapDispatchToProps: DispatchProps = {
-  loadNewCountry: (country: string) => topNewAction.loadNewCountry(country)
+  loadNewCountry: (country: string) => loadNewCountry(country)
 }
 
 export default connect(
