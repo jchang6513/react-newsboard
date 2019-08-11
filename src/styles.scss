@@ -178,6 +178,21 @@ a {
   }
 }
 
+.category-list {
+  .list-block {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    .category-block {
+      flex: 0 0 30%;
+      text-align: center;
+      .category-icon {
+        height: 40px;
+      }
+    }
+  }
+}
+
 .list-enter {
   opacity: 0.01;
   .list {
