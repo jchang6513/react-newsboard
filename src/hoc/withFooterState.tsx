@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { StoreState } from '../reducers/store';
 import { loadNewCountry } from '../actions/FetchActions';
 import { ComponentType } from 'react';
+import { getCountry } from '../selector';
 
 interface StateProps {
   country: string
@@ -13,7 +14,7 @@ interface DispatchProps {
 export type FooterMapProps = StateProps & DispatchProps;
 
 const mapStateToProps = (state: StoreState): StateProps => ({
-  country: state.Params.country
+  country: getCountry(state)
 })
 
 const mapDispatchToProps: DispatchProps = {

@@ -1,6 +1,7 @@
 import { StoreState } from '../reducers/store';
 import { connect } from 'react-redux';
 import { ComponentType } from 'react';
+import { getCountryName, getCategory } from '../selector';
 
 export interface StateProps {
   country: string;
@@ -9,18 +10,9 @@ export interface StateProps {
 
 export type HeaderMapProps = StateProps;
 
-const countryName:{[key in string]: string} = {
-  cn: 'CHINA',
-  hk: 'HONGKONG',
-  jp: 'JAPAN',
-  tw: 'TAIWAN',
-  uk: 'BRITISH',
-  us: 'AMERICA'
-}
-
 const mapStateToProps = (state: StoreState): StateProps => ({
-  category: state.Params.category,
-  country: countryName[state.Params.country]
+  category: getCategory(state),
+  country: getCountryName(state),
 })
 
 const withHeaderState = (Comp: ComponentType<any>) =>  (

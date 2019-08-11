@@ -4,6 +4,7 @@ import { resetNews } from '../actions/NewsActions';
 import { News } from '../data/News';
 import { connect } from 'react-redux';
 import { loadMoreNews } from '../actions/FetchActions';
+import { getLoading, getNewsArr, getEndOfNews, getPage } from '../selector';
 
 interface StateProps {
   loading: boolean;
@@ -20,10 +21,10 @@ interface DispatchProps {
 export type TopNewsMapProps = StateProps & DispatchProps;
 
 const mapStateToProps = (state: StoreState): StateProps => ({
-  loading: state.News.loading,
-  page: state.Params.page,
-  newsArr: state.News.newsArr,
-  endOfNews: state.News.endOfNews
+  loading: getLoading(state),
+  page: getPage(state),
+  newsArr: getNewsArr(state),
+  endOfNews: getEndOfNews(state)
 })
 
 const mapDispatchToProps: DispatchProps = {
