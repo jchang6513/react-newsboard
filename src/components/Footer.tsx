@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 import CountryList from './CountryList';
-import { FooterProps } from '../container/FooterContainer';
+import withFooterState, { FooterMapProps } from '../hoc/withFooterState';
+
+type FooterProps = FooterMapProps;
 
 const Footer = (props: FooterProps) => {
   const { country, loadNewCountry } = props;
@@ -51,4 +53,4 @@ const Footer = (props: FooterProps) => {
   );
 };
 
-export default Footer;
+export default withFooterState(Footer);

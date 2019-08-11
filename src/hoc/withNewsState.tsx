@@ -1,8 +1,8 @@
+import { ComponentType } from 'react';
 import { StoreState } from '../reducers/store';
 import { resetNews } from '../actions/NewsActions';
 import { News } from '../data/News';
 import { connect } from 'react-redux';
-import NewsComponent from '../components/News';
 import { loadMoreNews } from '../actions/FetchActions';
 
 interface StateProps {
@@ -17,7 +17,7 @@ interface DispatchProps {
   loadMoreNews: (page: number) => void;
 }
 
-export type TopNewsProps = StateProps & DispatchProps;
+export type TopNewsMapProps = StateProps & DispatchProps;
 
 const mapStateToProps = (state: StoreState): StateProps => ({
   loading: state.News.loading,
@@ -31,7 +31,11 @@ const mapDispatchToProps: DispatchProps = {
   loadMoreNews: (page: number) => loadMoreNews(page)
 }
 
-export default connect<StateProps, DispatchProps, {}, StoreState>(
-  mapStateToProps,
-  mapDispatchToProps
-)(NewsComponent)
+const withNewsState = (Comp: ComponentType<any>) => (
+  connect<StateProps, DispatchProps, {}, StoreState>(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Comp)
+);
+
+export default withNewsState

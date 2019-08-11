@@ -1,11 +1,7 @@
 import React from "react";
+import withHeaderState, { HeaderMapProps } from '../hoc/withHeaderState';
 
-export interface StateProps {
-  country: string;
-  category: string;
-}
-
-type HeaderProps = StateProps;
+type HeaderProps = HeaderMapProps;
 
 const Header = (props: HeaderProps) => {
   const { category, country } = props;
@@ -17,4 +13,4 @@ const Header = (props: HeaderProps) => {
   );
 }
 
-export default Header;
+export default withHeaderState(Header);

@@ -2,19 +2,20 @@ import React from "react";
 import { render } from "react-dom";
 import { Provider } from 'react-redux';
 import store from './reducers/store';
-import TopNewsContainer from './container/NewsContainer';
-import HeaderContainer from './container/HeaderContainer';
-import FooterContainer from './container/FooterContainer';
+import Header from './components/Header';
+import TopNews from './components/News';
+import Footer from './components/Footer';
 
 import "./styles.scss";
+
 
 const App = () => {
   return (
     <div id="App">
       <Provider store={store}>
-        <HeaderContainer />
-        <TopNewsContainer />
-        <FooterContainer />
+        <Header />
+        <TopNews />
+        <Footer />
       </Provider>
     </div>
   );

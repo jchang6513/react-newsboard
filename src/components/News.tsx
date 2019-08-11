@@ -1,9 +1,10 @@
 import React from "react";
-import { TopNewsProps } from '../container/NewsContainer';
 import LoadingDots from './LoadingDots';
 import NewsGrid from './NewsGrid';
+import withNewsState, { TopNewsMapProps } from '../hoc/withNewsState';
 
-export default class TopNews extends React.Component<TopNewsProps, {}> {
+type TopNewsProps = TopNewsMapProps;
+class TopNews extends React.Component<TopNewsProps, {}> {
   constructor(props: TopNewsProps) {
     super(props);
   }
@@ -51,4 +52,4 @@ export default class TopNews extends React.Component<TopNewsProps, {}> {
   }
 }
 
-
+export default withNewsState(TopNews);
