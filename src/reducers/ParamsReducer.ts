@@ -1,10 +1,18 @@
 import { Action } from 'redux';
 import { ParamsActionTypes } from '../actions/ParamsActionTypes';
-import { StringAction, NumberAction } from '../types/redux.type';
 
+export enum Category {
+  Business = 'business',
+  Entertainment = 'entertainment',
+  General = 'general',
+  Health = 'health',
+  Science = 'science',
+  Sports = 'sports',
+  Technology = 'technology'
+}
 export interface ParamsState {
+  category: Category;
   country: string;
-  category: string;
   q: string;
   page: number;
   pageSize: number;
@@ -12,38 +20,42 @@ export interface ParamsState {
 
 const initState: ParamsState = {
   country: 'tw',
-  category: 'general',
+  category: Category.General,
   q: '',
   page: 1,
   pageSize: 10,
 }
 
-const reducer = (state: ParamsState = initState, action: Action): ParamsState => {
+export interface ParamsAction extends Action {
+  value: Category | string | number
+}
+
+const reducer = (state: ParamsState = initState, action: ParamsAction): ParamsState => {
   switch(action.type) {
     case ParamsActionTypes.CHANGE_CATEGORY:
       return {
         ...state,
-        category: (action as StringAction).value
+        category: action.value as Category
       }
     case ParamsActionTypes.CHANGE_COUNTRY:
       return {
         ...state,
-        country: (action as StringAction).value
+        country: action.value as string
       }
     case ParamsActionTypes.CHANGE_PAGE:
       return {
         ...state,
-        page: (action as NumberAction).value
+        page: action.value as number
       }
     case ParamsActionTypes.CHANGE_PAGE_SIZE:
       return {
         ...state,
-        pageSize: (action as NumberAction).value
+        pageSize: action.value as number
       }
     case ParamsActionTypes.SET_Q:
       return {
         ...state,
-        q: (action as StringAction).value
+        q: action.value as string
       }
     default:
       return state;
