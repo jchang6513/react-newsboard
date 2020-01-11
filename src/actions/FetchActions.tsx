@@ -3,9 +3,9 @@ import axios from "axios";
 import NewsFactory from "../data/NewsFactory";
 import { News } from '../data/News';
 import { Dispatch, PromiseAction, ThunkAction } from '../types/redux.type';
-import { ParamsState, Country } from '../reducers/ParamsReducer';
+import { ParamsState, Country, Category } from '../reducers/ParamsReducer';
 import { loadTopNewsArrStart, loadTopNewsArrSucces, loadTopNewsArrFail, setLoading, resetNews } from './NewsActions';
-import { changeParamsPage, changeParamsCountry } from './ParamsActions';
+import { changeParamsPage, changeParamsCountry, changeParamsCategory } from './ParamsActions';
 
 
 axios.defaults.headers.common["X-Api-Key"] = process.env.REACT_APP_NEWS_KEY;
@@ -73,6 +73,26 @@ export const loadNewsFromCountry = (country: Country) => (wrapLoadNews(
       dispatch(changeParamsPage(1))
     } catch(err) {
       dispatch(changeParamsCountry(prevParams.country))
+      dispatch(changeParamsPage(prevParams.page))
+      throw err;
+    }
+  }
+))
+
+export const loadNewsWithCategory = (category: Category) => (wrapLoadNews(
+  async (dispatch, prevParams) => {
+    const params = {
+      ...prevParams,
+      page: 1,
+      category
+    }
+    try {
+      dispatch(resetNews());
+      dispatch(changeParamsCategory(category))
+      await dispatch(loadTopNewsArr(params));
+      dispatch(changeParamsPage(1))
+    } catch(err) {
+      dispatch(changeParamsCategory(prevParams.category))
       dispatch(changeParamsPage(prevParams.page))
       throw err;
     }
