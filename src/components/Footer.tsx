@@ -1,19 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useStore } from 'react-redux';
 import { TransitionGroup, CSSTransition } from "react-transition-group";
-
-import { loadNewsFromCountry } from '../actions/FetchActions';
 
 import CountryList from './CountryList';
 import CategoryList from './CategoryList';
-import { getCountry } from '../selector';
-import { Country } from '../reducers/ParamsReducer';
 
 const Footer = () => {
-  const state = useStore();
-  const country = getCountry(state.getState());
-  const dispatch = useDispatch();
-
   const [showCountryList, setShowCountryList] = useState(false);
   const [showCategoryList, setShowCategoryList] = useState(false);
 
@@ -35,7 +26,7 @@ const Footer = () => {
         { showCountryList &&
           <CSSTransition classNames="list" timeout={300}>
             <div className="back-drop" onClick={() => setShowCountryList(false)}>
-              <CountryList country={country} onClick={(c: Country) => dispatch(loadNewsFromCountry(c))}/>
+              <CountryList />
             </div>
           </CSSTransition>
         }

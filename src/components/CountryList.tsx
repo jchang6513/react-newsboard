@@ -1,6 +1,9 @@
 import React from 'react';
 import { CN, HK, JP, TW, UK, US, } from './CountryFlag';
 import { Country } from '../reducers/ParamsReducer';
+import { useStore, useDispatch } from 'react-redux';
+import { getCountry } from '../selector';
+import { loadNewsFromCountry } from '../actions/FetchActions';
 
 interface CountryComp {
   svg: JSX.Element;
@@ -41,13 +44,10 @@ const countries: CountryComp[] = [
   }
 ]
 
-interface CountryListProps {
-  country: string
-  onClick: (country: Country) => void;
-}
+const CountryList = () => {
+  const country = getCountry(useStore().getState());
+  const dispatch = useDispatch();
 
-const CountryList = (props: CountryListProps) => {
-  const { country, onClick } = props;
   return (
     <div className="list country-list">
       <div className="list-block">
@@ -56,7 +56,7 @@ const CountryList = (props: CountryListProps) => {
             <div
               key={value}
               className="list-item country"
-              onClick={() => onClick(value)}
+              onClick={() => dispatch(loadNewsFromCountry(value))}
             >
               {svg}
               <span className={country == value ? 'selected' : '' }>{title}</span>
