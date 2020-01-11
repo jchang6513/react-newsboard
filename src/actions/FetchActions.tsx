@@ -3,7 +3,7 @@ import axios from "axios";
 import NewsFactory from "../data/NewsFactory";
 import { News } from '../data/News';
 import { Dispatch, PromiseAction, ThunkAction } from '../types/redux.type';
-import { ParamsState } from '../reducers/ParamsReducer';
+import { ParamsState, Country } from '../reducers/ParamsReducer';
 import { loadTopNewsArrStart, loadTopNewsArrSucces, loadTopNewsArrFail, setLoading, resetNews } from './NewsActions';
 import { changeParamsPage, changeParamsCountry } from './ParamsActions';
 
@@ -59,7 +59,7 @@ export const loadMoreNews = (page: number) => (wrapLoadNews(
   }
 ))
 
-export const loadNewsFromCountry = (country: string) => (wrapLoadNews(
+export const loadNewsFromCountry = (country: Country) => (wrapLoadNews(
   async (dispatch, prevParams) => {
     const params = {
       ...prevParams,

@@ -1,47 +1,49 @@
 import React from 'react';
 import { CN, HK, JP, TW, UK, US, } from './CountryFlag';
+import { Country } from '../reducers/ParamsReducer';
 
-interface Country {
+interface CountryComp {
   svg: JSX.Element;
   title: string;
-  value: string;
+  value: Country;
 }
 
-const countries: Country[] = [
+const countries: CountryComp[] = [
   {
     svg: CN,
     title: 'China',
-    value: 'cn',
+    value: Country.China,
   },
   {
     svg: HK,
     title: 'Hong Kong',
-    value: 'hk',
+    value: Country.HongKong,
   },
   {
     svg: JP,
     title: 'Japan',
-    value: 'jp',
+    value: Country.Japan,
   },
   {
     svg: TW,
     title: 'Taiwan',
-    value: 'tw'
+    value: Country.Taiwan,
   },
-  { svg: UK,
-    title: 'United Kindom',
-    value: 'uk',
+  {
+    svg: UK,
+    title: 'United Kingdom',
+    value: Country.UnitedKingdom,
   },
   {
     svg: US,
     title: 'United State',
-    value: 'us',
+    value: Country.UnitedState,
   }
 ]
 
 interface CountryListProps {
   country: string
-  onClick: (country: string) => void;
+  onClick: (country: Country) => void;
 }
 
 const CountryList = (props: CountryListProps) => {
@@ -50,7 +52,7 @@ const CountryList = (props: CountryListProps) => {
     <div className="list country-list">
       <div className="list-block">
         {
-          countries.map(({svg, value, title}) => (
+          countries.map(({svg, value, title}: CountryComp) => (
             <div
               key={value}
               className="list-item country"

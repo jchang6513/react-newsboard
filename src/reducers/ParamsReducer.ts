@@ -10,16 +10,26 @@ export enum Category {
   Sports = 'sports',
   Technology = 'technology'
 }
+
+export enum Country {
+  China = 'cn',
+  HongKong = 'hk',
+  Japan = 'jp',
+  Taiwan = 'tw',
+  UnitedKingdom = 'uk',
+  UnitedState = 'us',
+}
+
 export interface ParamsState {
   category: Category;
-  country: string;
+  country: Country;
   q: string;
   page: number;
   pageSize: number;
 }
 
 const initState: ParamsState = {
-  country: 'tw',
+  country: Country.Taiwan,
   category: Category.General,
   q: '',
   page: 1,
@@ -40,7 +50,7 @@ const reducer = (state: ParamsState = initState, action: ParamsAction): ParamsSt
     case ParamsActionTypes.CHANGE_COUNTRY:
       return {
         ...state,
-        country: action.value as string
+        country: action.value as Country
       }
     case ParamsActionTypes.CHANGE_PAGE:
       return {
