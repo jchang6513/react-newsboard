@@ -59,16 +59,22 @@ export const loadMoreNews = (page: number) => (wrapLoadNews(
   }
 ))
 
-export const loadNewCountry = (country: string) => (wrapLoadNews(
+export const loadNewsFromCountry = (country: string) => (wrapLoadNews(
   async (dispatch, prevParams) => {
     const params = {
       ...prevParams,
       page: 1,
       country
     }
-    dispatch(resetNews());
-    await dispatch(loadTopNewsArr(params));
-    dispatch(changeParamsCountry(country))
-    dispatch(changeParamsPage(1))
+    try {
+      dispatch(resetNews());
+      dispatch(changeParamsCountry(country))
+      await dispatch(loadTopNewsArr(params));
+      dispatch(changeParamsPage(1))
+    } catch(err) {
+      dispatch(changeParamsCountry(prevParams.country))
+      dispatch(changeParamsPage(prevParams.page))
+      throw err;
+    }
   }
 ))
